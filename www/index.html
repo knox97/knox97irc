@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html ng-app="ircChat">
+<head>
+	<title>NodeJS IRC</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="js/config.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript" src="js/scripts/loadingBuffer.js"></script>
+</head>
+<body>
+	<!--
+	Models for users
+	Collection for all the online users
+	Hook user up with
+	-->
+
+
+	<!-- div where you render you templates -->
+	<div class="process">
+		<div class="window" ng-controller="login-sys">
+			<div id="tabs" class="window-main">
+				<ul>
+					<li><a href="#login">Login</a></li>
+					<li><a href="#register">Register</a></li>
+				</ul>
+				<div id="login">
+					<p>Username</p>
+					<input id="login-user" type="text" placeholder="Username">
+					<p>Password</p>
+					<input id="login-pass" type="password" placeholder="Password"> <br>
+					<button ng-click="login()">Login</button>
+				</div>
+				<div id="register">
+					<p>Username</p>
+					<input id="register-user" type="text" placeholder="Username">
+					<p>Password</p>
+					<input id="register-pass" type="password" placeholder="Password">
+					<p>Confirm password</p>
+					<input id="register-pass1" type="password" placeholder="Password"> <br>
+					<button ng-click="register()">Register</button>
+				</div>
+			</div>
+		</div>
+	
+
+	</div>
+
+
+		<div class="main">
+			<!-- Chat -->
+			<div class="chat">
+				<div id="chat-output" class="output">
+					<!-- TEMPLATE
+					<div class="message">
+						<p>
+							<span class="time">12:35 PM</span>
+							<span class="user"><span style="color: #0088CC;">kno</span><span style="color: #FF8271;">x97</span>:</span>
+							Whats up
+						</p>
+					</div>
+					-->
+				</div>
+				<div class="input" ng-controller="chat-input">
+					<textarea id="chat-io" placeholder="Type message here"></textarea>
+				</div>
+			</div>
+			<!-- Users -->
+			<div class="users">
+				<div class="show">
+					<div class="settings">
+						<span id="settings-link" class="glyphicon glyphicon-cog"></span>
+					</div>
+					<div class="show-button">
+						<span class="glyphicon glyphicon-menu-left"></span>
+					</div>
+				</div>
+				<div class="online-users" ng-controller="chat-users">
+					<!-- TEMPLATE
+					<div class="user">knox97</div>
+					-->
+					
+				</div>
+			</div>
+
+			<div id="settings" title="Settings" ng-controller="settings">
+				<p>Username</p>
+				<input id="set-nick" type="text" ng-model="nick">
+				<p>Connect message</p>
+				<input id="set-connect" type="text" ng-model="connect" placeholder="No message">
+				<p>Disconnect message</p>
+				<input id="set-disconnect" type="text" ng-model="disconnect" placeholder="No message">
+			</div>
+		</div>
+
+		
+	<!-- Login/Register UI
+		<div class="window">
+
+			
+			<div id="tabs" class="main">
+				<ul>
+					<li><a href="#login">Login</a></li>
+					<li><a href="#register">Register</a></li>
+				</ul>
+				<div id="login">
+					<p>Username</p>
+					<input type="text">
+					<p>Password</p>
+					<input type="password"> <br>
+					<button>Login</button>
+				</div>
+				<div id="register">
+					<p>Username</p>
+					<input type="text">
+					<p>Password</p>
+					<input type="password">
+					<p>Confirm password</p>
+					<input type="password"> <br>
+					<button>Register</button>
+				</div>
+			</div>
+		</div>-->
+
+
+	<div class="log">
+		Hello there :)
+	</div>
+	
+
+	<div id="loadingBuffer">
+		<img src="img/buffer.gif" alt="buffer">
+		<h3>Please wait..</h3>
+	</div>
+
+	<!-- libraries -->
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts/logSystem.js"></script>
+	<script>
+		$( "#tabs" ).tabs();
+		$( "#settings" ).dialog({
+			autoOpen: false,
+			width: 400,
+			buttons: [
+				{
+					text: "Save",
+					click: function() {
+						var newNick = $('#set-nick').val().trim().replace(/\s+/gi, '');
+						var onConnect = $('#set-connect').val().trim().replace(/\s+/gi, '+');
+						var onDisconnect = $('#set-disconnect').val().trim().replace(/\s+/gi, '+');
+						var isValid = true;
+						var username;
+						var Cookies = document.cookie;
+						if (Cookies.match(/;/gi) != null) {
+							Cookies = Cookies
+								.split(';')
+								.forEach(function(cookie) {
+									cookie = cookie.split('=');
+									if (cookie[0].trim() == 'user') {
+										username = cookie[1];
+									}
+								});
+
+						}
+						else
+							username = Cookies.split('=')[1];
+
+						console.log(newNick, onConnect, onDisconnect);
+
+						var checkNick = newNick.replace(/#[0-9abcdef]{6}[A-Z0-9]+/gi, '').length;
+						var onlyNick = newNick.replace(/#[0-9abcdef]{6}/gi, '');
+
+						console.log(checkNick, onlyNick);
+						if (checkNick > 0) {
+							logError('Invalid form');
+							isValid = false;
+						}
+						else if (onlyNick != username) {
+							logError('You can\'t change your nick, only colors');
+							isValid = false;
+						}
+
+						if (isValid) {
+							var url = `${httpURL}/api/updateSettings`;
+							document.cookie = `nick=${newNick}`;
+							var postBody = {
+								user: username,
+								nick: newNick,
+								con: onConnect,
+								dis: onDisconnect
+							};
+							console.log(url);
+
+							$.ajax({
+								type: 'POST',
+								url: url,
+								dataType: 'json',
+								data: postBody,
+								success: function(data) {
+									var status = data.data;
+									if (status == 'SUCCESS') {
+										logSuccess(data.message);
+										$('#settings').dialog( "close" );
+									}
+									if (status == 'ERROR') {
+										logError(data.message);
+									}
+								},
+								error: function(err) {
+									console.log(err);
+								}
+							});	
+						}
+						
+					}
+				},
+				{
+					text: "Cancel",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+
+		// Link to open the dialog
+		$( "#settings-link" ).click(function( event ) {
+			$( "#settings" ).dialog( "open" );
+			event.preventDefault();
+		});
+	</script>
+	<script type="text/javascript" src="js/scripts/init.js"></script>
+	<script type="text/javascript" src="js/scripts/users.js"></script>
+	<!-- files -->
+	<script src="js/models/chat.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/scripts/chatSystem.js"></script>
+	<script>
+		loading('hide', 1500, true);
+	</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+<div class="window">		
+	<div id="tabs" class="main">
+		<ul>
+			<li><a href="#login">Login</a></li>
+			<li><a href="#register">Register</a></li>
+		</ul>
+		<div id="login">
+			<p>Username</p>
+			<input type="text" placeholder="Username">
+			<p>Password</p>
+			<input type="password" placeholder="Password"> <br>
+			<a href="#chat">go to chat</a>
+			<button onclick="logSuccess('Test')">Login</button>
+		</div>
+		<div id="register">
+			<p>Username</p>
+			<input type="text" placeholder="Username">
+			<p>Password</p>
+			<input type="password" placeholder="Password">
+			<p>Confirm password</p>
+			<input type="password" placeholder="Password"> <br>
+			<button onclick="logError('an error throw new Error();')">Register</button>
+		</div>
+	</div>
+</div>

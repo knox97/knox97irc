@@ -1,0 +1,48 @@
+<div class="main">
+			<!-- Chat -->
+			<div class="chat">
+				<div class="output">
+					<!-- TEMPLATE
+					<div class="message">
+						<p>
+							<span class="time">12:35 PM</span>
+							<span class="user"><span style="color: #0088CC;">kno</span><span style="color: #FF8271;">x97</span>:</span>
+							Whats up
+						</p>
+					</div>
+					-->
+				</div>
+				<div class="input">
+					<textarea placeholder="Type message here"></textarea>
+				</div>
+			</div>
+			<!-- Users -->
+			<div class="users">
+				<div class="show">
+					<div class="settings">
+						<span id="settings-link" class="glyphicon glyphicon-cog"></span>
+					</div>
+					<div class="show-button">
+						<span class="glyphicon glyphicon-menu-left"></span>
+					</div>
+				</div>
+				<div class="online-users" ng-controller="chat-users">
+					<!-- TEMPLATE
+					<div class="user">knox97</div>
+					-->
+					<div ng-repeat="user in fakeUsers">
+						<div class="user">{{ user }}</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div id="settings" title="Settings">
+			<p>Username</p>
+			<input type="text" value="#0088CCkno#FF8271x97">
+			<p>Connect message</p>
+			<input type="text" value="JavaScript master has joined the server">
+			<p>Disconnect message</p>
+			<input type="text" value="JavaScript master has left, good luck u r on ur own">
+		</div>

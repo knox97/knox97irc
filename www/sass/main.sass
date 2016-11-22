@@ -1,0 +1,227 @@
+$bg: #353535
+$color: #FFF
+$hover_color: #FFFFAA
+$black: rgba(0,0,0,0.35)
+
+*
+	transition: all 0.1s linear !important
+
+body, html
+	margin: 0
+	padding: 0
+	color: $color
+	background: url('/img/bgBuffer.jpg') no-repeat center center fixed !important
+	-webkit-background-size: cover !important
+	-moz-background-size: cover !important
+	-o-background-size: cover !important
+	background-size: cover !important
+
+input, textarea, button
+	background: rgba(0,0,0,0.35) !important
+	color: $color
+	border: 1px solid #222
+	padding: 5px
+	margin: 0
+
+button
+	border: 1px solid #309000
+	padding: 6px 10px
+	font-weight: bold
+	&:hover
+		border: 1px solid #60b000
+
+::-webkit-scrollbar 
+	background: $black
+	border: 2px solid $black
+::-webkit-scrollbar-button
+	background: #111
+::-webkit-scrollbar-track 
+	background: $black
+::-webkit-scrollbar-track-piece
+	background: $black
+::-webkit-scrollbar-thumb      
+	background: #333
+	border: 2px solid #111
+	border-radius: 16px
+
+::-webkit-scrollbar-corner     
+	background: #000
+::-webkit-resizer     
+	background: #FF0
+
+.window
+	background: rgba(0,0,0,0.35)
+	min-width: 100px
+	visibility: hidden
+	width: 100%
+	max-width: 650px
+	margin: 0 auto
+	.window-main
+		color: #FF0
+		background: rgba(0,0,0,0.35)
+		p
+			color: $color
+			font-weight: bold
+			margin: 10px 0
+			font-size: 1.35en
+			text-shadow: 0px 0px 2px 19px #000
+			padding: 0
+		button
+			margin-top: 16px
+
+.main
+	visibility: hidden
+	color: $color
+	.chat
+		background: rgba(0,0,0,0.15)
+		position: fixed
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		.input
+			position: fixed
+			bottom: 0
+			left: 0
+			width: 100%
+			height: 80px
+			textarea
+				resize: none
+				background: rgba(0,0,0,0.5) !important
+				width: 100%
+				height: 100%
+		.output
+			position: fixed
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			overflow-y: scroll
+			.message
+				float: left
+				width: 100%
+				padding: 8px 10px
+				margin: 0
+				border-bottom: 1px solid rgba(0,0,0,0.35)
+				p
+					text-shadow: 1px 1px 1px #000
+					margin: 0
+					padding: 0
+					span
+						float: left
+						margin: 0
+						padding: 0
+						word-break: word-break
+						padding-right: 10px
+					.time
+						color: #999
+					.user
+						span
+							padding: 0
+						font-weight: bold
+
+	.users
+		background: #333
+		position: fixed
+		top: 0
+		right: -200px
+		height: 100%
+		width: 250px
+		.show
+			background: rgba(0,0,0,0.35)
+			width: 50px
+			height: 100%
+			cursor: pointer
+			text-align: center
+			.settings
+				margin: 0
+				padding: 0
+				span
+					padding: 12px
+					font-size: 100%
+					width: 50px
+					height: 50px
+					font-size: 25px
+					&:hover
+						background: rgba(0,0,0,0.35)
+						color: $hover_color
+			.show-button
+				margin: 0
+				padding: 42vh 0
+				&:hover
+					background: rgba(0,0,0,0.35)
+					color: $hover_color
+				span
+					width: 50px
+					height: 50px
+					font-size: 25px
+		.online-users
+			float: left
+			margin: 0
+			padding: 0
+			position: absolute
+			top: 0
+			right: 0
+			width: 200px
+			height: 100%
+			overflow-y: scroll
+			.user
+				color: $color
+				padding: 5px 10px
+				background: rgba(0,0,0,0.1)
+				border-bottom: 1px solid rgba(0,0,0,0.20)
+				cursor: pointer
+				&:hover
+					background: rgba(0,0,0,0.65)
+					border-width: 10px
+					margin-top: -10px
+					color: $hover_color
+				&:hover:first-child
+					background: rgba(0,0,0,0.65)
+					border-width: 0px
+					border-bottom: 10px solid #000
+					margin-top: 0px
+					color: $hover_color
+
+.log
+	position: fixed
+	background: #333
+	color: $color
+	padding: 10px
+	border: 2px solid #50b200
+	width: 90%
+	left: 5%
+	top: -64px
+
+
+#settings
+	input
+		width: 100%
+
+#loadingBuffer
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	background: url('/img/bgBuffer.jpg') no-repeat center center fixed !important
+	-webkit-background-size: cover !important
+	-moz-background-size: cover !important
+	-o-background-size: cover !important
+	background-size: cover !important
+	font-weight: bold
+	text-align: center
+	color: $color
+	padding-top: 16%
+	transition: all 0.35s ease-out !important
+	img
+		max-width: 100px
+		max-height: 100px
+
+
+@media (min-width: 800px)
+	.window
+		margin-top: 10vh
+	.log
+		width: 60%
+		left: 20%
