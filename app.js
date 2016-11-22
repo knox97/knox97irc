@@ -7,7 +7,7 @@ var app = express();
 //var io = require('socket.io')();
 
 //connecting to database
-mongoose.connect('mongodb://knox:knox@ds157247.mlab.com:57247/irc');
+mongoose.connect('mongodb://<user>:<pass>@ds157247.mlab.com:57247/irc');
 
 var api = require('./routes/api.js');
 
